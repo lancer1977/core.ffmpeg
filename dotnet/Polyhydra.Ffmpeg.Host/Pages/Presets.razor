@@ -1,0 +1,18 @@
+@page "/presets"
+@inject Polyhydra.Ffmpeg.Host.Services.HostWorkflowService Workflow
+
+<MudText Typo="Typo.h3" GutterBottom="true">Presets</MudText>
+<MudText Color="Color.Secondary" Class="mb-4">Seeded encoder profiles that feed the job builder and command preview.</MudText>
+
+<MudGrid Spacing="3">
+    @foreach (var preset in Workflow.Presets)
+    {
+        <MudItem xs="12" md="6">
+            <MudPaper Class="pa-4" Elevation="1">
+                <MudText Typo="Typo.h6">@preset.Name</MudText>
+                <MudText Color="Color.Secondary">Video: @(preset.VideoCodec ?? "copy") · Audio: @(preset.AudioCodec ?? "copy")</MudText>
+                <MudText Typo="Typo.body2" Class="mt-2">Bitrate: @(preset.VideoBitrate ?? "n/a") / @(preset.AudioBitrate ?? "n/a") · Preset: @(preset.Preset ?? "n/a")</MudText>
+            </MudPaper>
+        </MudItem>
+    }
+</MudGrid>

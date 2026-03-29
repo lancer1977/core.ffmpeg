@@ -1,0 +1,41 @@
+@page "/probe"
+@inject Polyhydra.Ffmpeg.Host.Services.HostWorkflowService Workflow
+
+<MudText Typo="Typo.h3" GutterBottom="true">Probe</MudText>
+<MudText Color="Color.Secondary" Class="mb-4">Probe media through the shared IFfprobeService. The current implementation is intentionally lightweight.</MudText>
+
+<MudGrid Spacing="3">
+    <MudItem xs="12" md="5">
+        <MudPaper Class="pa-4" Elevation="1">
+            <MudTextField @bind-Value="_sourcePath" Label="Source path" Margin="Margin.Dense" />
+            <MudButton Class="mt-4" Variant="Variant.Filled" Color="Color.Primary" OnClick="RunProbe">Run probe</MudButton>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" md="7">
+        <MudPaper Class="pa-4" Elevation="1">
+            @if (_result is null)
+            {
+                <MudAlert Severity="Severity.Info">Run a probe to see the snapshot returned by the service.</MudAlert>
+            }
+            else
+            {
+                <MudText Typo="Typo.h6">Snapshot</MudText>
+                <MudText Typo="Typo.body2">Source: @_result.Snapshot.SourcePath</MudText>
+                <MudText Typo="Typo.body2">Duration: @Format(_result.Snapshot.Duration)</MudText>
+                <MudText Typo="Typo.body2">Resolution: @FormatResolution(_result.Snapshot.Width, _result.Snapshot.Height)</MudText>
+                <MudText Typo="Typo.body2">Video codec: @(_result.Snapshot.VideoCodec ?? "unknown")</MudText>
+                <MudText Typo="Typo.body2">Audio codec: @(_result.Snapshot.AudioCodec ?? "unknown")</MudText>
+            }
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+    private string _sourcePath = "sample.mp4";
+    private Polyhydra.Ffmpeg.Host.Services.ProbeViewModel? _result;
+
+    private async Task RunProbe() => _result = await Workflow.ProbeAsync(_sourcePath);
+
+    private static string Format(TimeSpan? value) => value?.ToString() ?? "unknown";
+    private static string FormatResolution(int? width, int? height) => width is null || height is null ? "unknown" : $"{width}x{height}";
+}

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Polyhydra.Core.Ffmpeg</RootNamespace>
+    <AssemblyName>Polyhydra.Core.Ffmpeg</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Polyhydra.Ffmpeg.Contracts/Polyhydra.Ffmpeg.Contracts.csproj" />
+  </ItemGroup>
+</Project>

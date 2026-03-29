@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polyhydra.Ffmpeg.Contracts", "Polyhydra.Ffmpeg.Contracts/Polyhydra.Ffmpeg.Contracts.csproj", "{B5D0A0F1-3D40-4D4D-9D74-5C7F4D7E8F0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polyhydra.Core.Ffmpeg", "Polyhydra.Core.Ffmpeg/Polyhydra.Core.Ffmpeg.csproj", "{6D8CEB6B-7E1D-4C4E-9B4C-33AC3D5B2F11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polyhydra.Ffmpeg.Host", "Polyhydra.Ffmpeg.Host/Polyhydra.Ffmpeg.Host.csproj", "{A1A2D3E4-5F6A-4B7C-8D9E-0123456789AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B5D0A0F1-3D40-4D4D-9D74-5C7F4D7E8F0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5D0A0F1-3D40-4D4D-9D74-5C7F4D7E8F0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5D0A0F1-3D40-4D4D-9D74-5C7F4D7E8F0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5D0A0F1-3D40-4D4D-9D74-5C7F4D7E8F0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D8CEB6B-7E1D-4C4E-9B4C-33AC3D5B2F11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D8CEB6B-7E1D-4C4E-9B4C-33AC3D5B2F11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D8CEB6B-7E1D-4C4E-9B4C-33AC3D5B2F11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D8CEB6B-7E1D-4C4E-9B4C-33AC3D5B2F11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1A2D3E4-5F6A-4B7C-8D9E-0123456789AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1A2D3E4-5F6A-4B7C-8D9E-0123456789AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1A2D3E4-5F6A-4B7C-8D9E-0123456789AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1A2D3E4-5F6A-4B7C-8D9E-0123456789AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

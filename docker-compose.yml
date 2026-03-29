@@ -1,0 +1,14 @@
+services:
+  polyhydra-ffmpeg-host:
+    build:
+      context: .
+      dockerfile: dotnet/Polyhydra.Ffmpeg.Host/Dockerfile
+    image: polyhydra/ffmpeg-host:dev
+    container_name: polyhydra-ffmpeg-host
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:8080
+      DISABLE_HTTPS_REDIRECT: "true"
+    restart: unless-stopped
