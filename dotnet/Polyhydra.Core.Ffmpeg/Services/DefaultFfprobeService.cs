@@ -32,13 +32,30 @@ public sealed class DefaultFfprobeService : IFfprobeService
         var stdoutTask = process.StandardOutput.ReadToEndAsync(cancellationToken);
         var stderrTask = process.StandardError.ReadToEndAsync(cancellationToken);
 
-        await process.WaitForExitAsync(cancellationToken);
+        try
+        {
+            await process.WaitForExitAsync(cancellationToken);
+        }
+        catch (OperationCanceledException)
+        {
+            if (!process.HasExited)
+            {
+                try { process.Kill(entireProcessTree: true); } catch { }
+            }
+
+            throw;
+        }
+
         var stdout = await stdoutTask;
         var stderr = await stderrTask;
 
         if (process.ExitCode != 0)
         {
-            throw new InvalidOperationException($"ffprobe exited with code {process.ExitCode}: {stderr}".Trim());
+            var message = string.IsNullOrWhiteSpace(stderr)
+                ? $"ffprobe exited with code {process.ExitCode}."
+                : $"ffprobe exited with code {process.ExitCode}: {stderr}";
+
+            throw new InvalidOperationException(message);
         }
 
         using var document = JsonDocument.Parse(stdout);

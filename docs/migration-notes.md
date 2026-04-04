@@ -38,9 +38,16 @@ It should be able to support:
 - overlayed playback
 - future Svengoolie video workflows
 
+## Current .NET contract surface
+- `FfmpegJobRequest` carries input/output, stream target, encoder, overlay, text, HLS options, and metadata.
+- `StreamTarget` encodes file / RTMP / HLS destination intent.
+- `HlsOutputOptions` keeps HLS segment timing and naming configurable.
+- `JobStatus` allows host-state tracking without coupling to one app.
+
 ## Porting order
 1. Recreate command builders in the core package
 2. Add probing and runtime helpers
 3. Migrate host app call sites
 4. Replace duplicated shell logic
 5. Add tests for parity
+6. Document app-specific integration samples once the shared shape is stable

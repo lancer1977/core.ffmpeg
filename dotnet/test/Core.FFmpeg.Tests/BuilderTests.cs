@@ -18,6 +18,9 @@ public static class BuilderTests
         Assert.Contains("-f", args);
         Assert.Contains("hls", args);
         Assert.Contains("-hls_time", args);
+        Assert.Contains("4", args);
+        Assert.Contains("-hls_playlist_type", args);
+        Assert.Contains("event", args);
         Assert.Contains("-hls_segment_filename", args);
         Assert.Contains("playlist-%03d.ts", args);
     }

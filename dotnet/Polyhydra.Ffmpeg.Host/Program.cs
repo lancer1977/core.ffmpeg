@@ -6,8 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCoreFfmpeg();
 builder.Services.AddMudServices();
+builder.Services.AddSingleton<Polyhydra.Ffmpeg.Host.Services.HostStorage>();
 builder.Services.AddSingleton<Polyhydra.Ffmpeg.Host.Services.HostState>();
 builder.Services.AddScoped<Polyhydra.Ffmpeg.Host.Services.HostWorkflowService>();
+builder.Services.AddScoped<Polyhydra.Ffmpeg.Host.Services.JobExecutionService>();
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 
 var app = builder.Build();

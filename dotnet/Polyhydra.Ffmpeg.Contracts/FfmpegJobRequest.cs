@@ -7,4 +7,5 @@ public sealed record FfmpegJobRequest(
     EncoderProfile? Encoder = null,
     OverlayOptions? Overlay = null,
     TextOverlayOptions? Text = null,
+    HlsOutputOptions? HlsOutput = null,
     IReadOnlyDictionary<string, string>? Metadata = null);

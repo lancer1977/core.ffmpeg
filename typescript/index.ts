@@ -5,4 +5,5 @@ export * from './process/index.js';
 export * from './probe/index.js';
 export * from './runtime/index.js';
 export * from './encoder/index.js';
+export * from './streaming/index.js';
 export * from './utils/index.js';

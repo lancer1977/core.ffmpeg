@@ -43,6 +43,7 @@ The package currently exports:
 - Typecheck: passing (`typescript` sources)
 - Tests: passing (`node:test` suite in `test/`)
 - Repository state: scaffold-plus-core-helpers, not a finished migration
+- .NET restores are pinned locally via `nuget.config` to avoid inheriting private feeds
 
 ## Planned structure
 

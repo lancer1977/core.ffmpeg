@@ -47,7 +47,7 @@ public sealed class DefaultFfmpegCommandBuilder : IFfmpegCommandBuilder
         }
 
         var destination = ResolveDestination(request);
-        AddOutputPreset(arguments, request.Target, destination);
+        AddOutputPreset(arguments, request.Target, destination, request.HlsOutput);
 
         return new FfmpegCommand("ffmpeg", arguments);
     }
@@ -169,18 +169,19 @@ public sealed class DefaultFfmpegCommandBuilder : IFfmpegCommandBuilder
         return ("0", "0");
     }
 
-    private static void AddOutputPreset(List<string> arguments, StreamTarget target, string destination)
+    private static void AddOutputPreset(List<string> arguments, StreamTarget target, string destination, HlsOutputOptions? hlsOutput)
     {
         switch (target.Kind)
         {
             case StreamTargetKind.Hls:
             {
-                var segmentPattern = $"{Path.GetFileNameWithoutExtension(destination)}-%03d.ts";
+                var hls = hlsOutput ?? new HlsOutputOptions();
+                var segmentPattern = hls.SegmentFilename ?? $"{Path.GetFileNameWithoutExtension(destination)}-%03d.ts";
                 arguments.AddRange(
                 [
                     "-f", "hls",
-                    "-hls_time", "4",
-                    "-hls_playlist_type", "event",
+                    "-hls_time", hls.SegmentTimeSeconds.ToString(),
+                    "-hls_playlist_type", hls.PlaylistType,
                     "-hls_segment_filename", segmentPattern,
                     destination
                 ]);

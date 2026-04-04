@@ -10,7 +10,7 @@
     <MudItem xs="12" md="3">
         <MudPaper Class="pa-4" Elevation="1">
             <MudText Typo="Typo.overline">Jobs</MudText>
-            <MudText Typo="Typo.h4">@Workflow.Jobs.Count</MudText>
+            <MudText Typo="Typo.h4">@Workflow.Overview.JobCount</MudText>
             <MudText Color="Color.Secondary">Queued definitions in memory</MudText>
         </MudPaper>
     </MudItem>
@@ -24,8 +24,15 @@
     <MudItem xs="12" md="3">
         <MudPaper Class="pa-4" Elevation="1">
             <MudText Typo="Typo.overline">Presets</MudText>
-            <MudText Typo="Typo.h4">@Workflow.Presets.Count</MudText>
+            <MudText Typo="Typo.h4">@Workflow.Overview.PresetCount</MudText>
             <MudText Color="Color.Secondary">Seeded encoder templates</MudText>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" md="3">
+        <MudPaper Class="pa-4" Elevation="1">
+            <MudText Typo="Typo.overline">Failed jobs</MudText>
+            <MudText Typo="Typo.h4">@Workflow.Overview.FailedJobs</MudText>
+            <MudText Color="Color.Secondary">Tracked in-memory failures</MudText>
         </MudPaper>
     </MudItem>
     <MudItem xs="12" md="3">

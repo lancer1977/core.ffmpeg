@@ -41,7 +41,7 @@ export function buildFfmpegCommand(config: FfmpegPipelineConfig): BuiltFfmpegCom
   if (encoding?.extraArgs?.length) args.push(...encoding.extraArgs);
 
   if (config.output.transport === 'hls') {
-    args.push('-f', 'hls');
+    args.push('-f', 'hls', '-hls_time', '4', '-hls_playlist_type', 'event', '-hls_segment_filename', `${config.output.target.replace(/\.[^.]+$/, '')}-%03d.ts`);
   } else if (config.output.transport === 'rtmp') {
     args.push('-f', 'flv');
   }
