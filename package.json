@@ -1,7 +1,19 @@
 {
   "name": "@polyhydra/core.ffmpeg",
   "version": "0.1.0",
-  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Polyhydra",
+  "license": "MIT",
+  "homepage": "https://github.com/Polyhydra-Network/core.ffmpeg",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Polyhydra-Network/core.ffmpeg.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Polyhydra-Network/core.ffmpeg/issues"
+  },
   "description": "Shared FFmpeg helpers for OpenClaw media apps",
   "type": "module",
   "main": "dist/index.js",

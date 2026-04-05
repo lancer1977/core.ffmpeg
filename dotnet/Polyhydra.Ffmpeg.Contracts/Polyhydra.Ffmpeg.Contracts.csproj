@@ -5,5 +5,14 @@
     <Nullable>enable</Nullable>
     <RootNamespace>Polyhydra.Ffmpeg.Contracts</RootNamespace>
     <AssemblyName>Polyhydra.Ffmpeg.Contracts</AssemblyName>
+    <Version>0.1.0</Version>
+    <Authors>Polyhydra</Authors>
+    <Company>Polyhydra</Company>
+    <PackageId>Polyhydra.Ffmpeg.Contracts</PackageId>
+    <PackageProjectUrl>https://github.com/Polyhydra-Network/core.ffmpeg</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Polyhydra-Network/core.ffmpeg</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Description>Contracts and data models for FFmpeg job definitions.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 </Project>
