@@ -16,6 +16,9 @@ Produces FFmpeg argument arrays and filter graphs for:
 - RTMP output
 - HLS output
 - local file output
+- Twitch/RTMP destination composition for playout apps
+- Busey-Box-compatible broadcaster command assembly
+- preset application for encoder/output/filter defaults
 
 ### 3. Probe and utility layer
 Provides helpers for:
@@ -48,6 +51,24 @@ That means:
 - no channel-specific rules in the core
 - no storage schema assumptions in the core
 
+## Cross-repo media-platform boundary
+
+`core.ffmpeg` sits after catalog/operator selection and before concrete output execution:
+
+- `Core.Models` provides shared media contracts.
+- `core.nas` discovers and indexes media.
+- `SvengoolieDB` adds product/catalog meaning.
+- `chop-it` lets an operator select or shape playlist/control intent.
+- `core.ffmpeg` builds and runs FFmpeg commands for RTMP, HLS, file output, overlays, runtime text, and probing.
+- `core.ffmpeg` also provides a small Twitch/RTMP destination helper so playout apps can compose ingest URLs without storing secrets in the library.
+- `core.ffmpeg` also exposes a Busey-Box-compatible broadcaster adapter for the current Docker playout command shape.
+- `core.ffmpeg` also lets host apps apply named render presets onto the shared pipeline config before command generation.
+- `core.ffmpeg` also resolves the active preset from a catalog so host apps can keep selection logic outside the engine.
+- `core.ffmpeg` also offers a resolved-pipeline helper that combines preset selection, preset merge, and codec fallback.
+- `Busey-Box` remains the concrete Twitch/RTMP playout app until the shared playout contract is stable.
+
+The immediate integration target is to prove that `core.ffmpeg` can represent the FFmpeg command currently hand-built by `app-busey-box/app/run_ffmpeg.sh`.
+
 ## Deployment pattern
 A common pattern for homelab use:
 
@@ -63,3 +84,9 @@ The core library should only know how to:
 - report state back to the caller
 
 Everything else belongs to the application.
+
+## Related docs
+
+- [SvengoolieDB media metadata transition](</home/lancer1977/code/SvengoolieDB/docs/roadmaps/media-metadata-transition/README.md>)
+- [One-swoop execution map](</home/lancer1977/code/SvengoolieDB/docs/roadmaps/media-metadata-transition/execution-map.md>)
+- [Cross-project link map](</home/lancer1977/code/SvengoolieDB/docs/roadmaps/media-metadata-transition/link-map.md>)

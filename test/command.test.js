@@ -23,7 +23,21 @@ test('buildDrawTextFilter applies defaults when enabled', () => {
 
   assert.equal(
     filter,
-    "drawtext=textfile='/tmp/now_playing.txt':reload=1:fontcolor=white:fontsize=24:x=(w-text_w)/2:y=h-(text_h*2)",
+    'drawtext=textfile=/tmp/now_playing.txt:reload=1:fontcolor=white:fontsize=24:x=(w-text_w)/2:y=h-(text_h*2):box=1:boxborderw=12:boxcolor=black@0.5',
+  );
+});
+
+test('buildDrawTextFilter includes fontfile and box settings when provided', () => {
+  const filter = buildDrawTextFilter({
+    path: '/tmp/now playing.txt',
+    fontFile: '/usr/share/fonts/DejaVuSans.ttf',
+    box: false,
+    boxBorderWidth: 8,
+  });
+
+  assert.equal(
+    filter,
+    'drawtext=fontfile=/usr/share/fonts/DejaVuSans.ttf:textfile=/tmp/now\\ playing.txt:reload=1:fontcolor=white:fontsize=24:x=(w-text_w)/2:y=h-(text_h*2):box=0:boxborderw=8:boxcolor=black@0.5',
   );
 });
 
@@ -65,7 +79,7 @@ test('buildFfmpegCommand assembles inputs, filters, encoding, and output', () =>
     '-i',
     'overlay-c.png',
     '-filter_complex',
-    "[0:v][1:v]overlay=10:20;[0:v][2:v]overlay=5:6;drawtext=textfile='/tmp/now_playing.txt':reload=1:fontcolor=white:fontsize=24:x=(w-text_w)/2:y=h-(text_h*2)",
+    '[0:v][1:v]overlay=10:20;[0:v][2:v]overlay=5:6;drawtext=textfile=/tmp/now_playing.txt:reload=1:fontcolor=white:fontsize=24:x=(w-text_w)/2:y=h-(text_h*2):box=1:boxborderw=12:boxcolor=black@0.5',
     '-c:v',
     'libx264',
     '-c:a',

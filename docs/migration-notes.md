@@ -8,12 +8,17 @@ Move into the shared core:
 - atomic write helper for runtime text
 - encoder selection and fallback behavior
 - ffprobe duration lookup
+- Twitch RTMP destination composition
+- Busey-Box-compatible broadcaster command assembly
+- preset merge and active-preset resolution
+- resolved pipeline assembly for host handoff
 
 Keep in the host app:
 - playlist logic
 - app-specific UI
 - state machine for which video to play next
 - environment-specific config management
+- app-side preset catalog ownership
 
 ## From chop-it/v2
 Move into the shared core:
@@ -28,6 +33,7 @@ Keep in the host app:
 - UI/API endpoints
 - app-specific presets
 - collection browsing and rendering workflow
+- preset catalog editing and activation UX
 
 ## Shared core boundary
 The shared package should not depend on any one app’s domain model.
@@ -51,3 +57,4 @@ It should be able to support:
 4. Replace duplicated shell logic
 5. Add tests for parity
 6. Document app-specific integration samples once the shared shape is stable
+7. Keep stream-key ownership and preset selection in the host app

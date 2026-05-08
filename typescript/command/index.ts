@@ -24,6 +24,9 @@ export function buildFfmpegCommand(config: FfmpegPipelineConfig): BuiltFfmpegCom
   if (overlayFilter) filters.push(overlayFilter);
   const drawTextFilter = buildDrawTextFilter(config.runtimeText);
   if (drawTextFilter) filters.push(drawTextFilter);
+  for (const presetFilter of config.presetFilters ?? []) {
+    if (presetFilter.vf) filters.push(presetFilter.vf);
+  }
   if (filters.length > 0) {
     args.push('-filter_complex', filters.join(';'));
   }
@@ -39,6 +42,14 @@ export function buildFfmpegCommand(config: FfmpegPipelineConfig): BuiltFfmpegCom
   pushIfDefined(args, '-tune', encoding?.tune);
   pushIfDefined(args, '-crf', encoding?.crf);
   if (encoding?.extraArgs?.length) args.push(...encoding.extraArgs);
+  for (const presetFilter of config.presetFilters ?? []) {
+    if (presetFilter.af) {
+      args.push('-af', presetFilter.af);
+    }
+    if (presetFilter.extraArgs?.length) {
+      args.push(...presetFilter.extraArgs);
+    }
+  }
 
   if (config.output.transport === 'hls') {
     args.push('-f', 'hls', '-hls_time', '4', '-hls_playlist_type', 'event', '-hls_segment_filename', `${config.output.target.replace(/\.[^.]+$/, '')}-%03d.ts`);

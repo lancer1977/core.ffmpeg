@@ -17,12 +17,19 @@ The public API should be simple enough for host apps to use without knowing FFmp
 - `OverlayCommandBuilder`
 - `TextOverlayBuilder`
 - `OutputTargetBuilder`
+- `composeTwitchRtmpUrl`
+- `buildTwitchRtmpOutput`
+- `buildBuseyBoxBroadcastCommand`
+- `applyRenderPreset`
+- `resolveActiveRenderPreset`
+- `buildResolvedPipelineConfig`
 
 ### Probing and utilities
 - `FfprobeService`
 - `EncoderCapabilityDetector`
 - `AtomicTextWriter`
 - `VideoFileScanner`
+- `resolveEncoderConfig`
 
 ### Runtime
 - `FfmpegProcessRunner`
@@ -52,6 +59,40 @@ const command = builder.build({
   output: { kind: 'rtmp', url: 'rtmp://...' },
   overlay: { image: '/assets/logo.png' },
   text: { file: '/run/now_playing.txt', enabled: true }
+});
+
+const twitchArgs = buildTwitchRtmpOutput('rtmp://live.twitch.tv/app/', process.env.TWITCH_STREAM_KEY ?? '');
+
+const buseyBoxCommand = buildBuseyBoxBroadcastCommand({
+  inputPath: '/media/input.mp4',
+  ingestUrl: 'rtmp://live.twitch.tv/app/',
+  streamKey: process.env.TWITCH_STREAM_KEY ?? '',
+});
+
+const presetConfig = applyRenderPreset(
+  { input: '/media/input.mp4', output: { transport: 'rtmp', target: 'rtmp://example/live/base' } },
+  { id: 'soft', name: 'Soft', category: 'basic', enabled: true, filters: [{ name: 'tone', vf: 'eq=contrast=1.2' }] },
+);
+
+const activePreset = resolveActiveRenderPreset(
+  [
+    { id: 'soft', name: 'Soft', enabled: true },
+    { id: 'hard', name: 'Hard', enabled: false },
+  ],
+  'soft',
+);
+
+const encoder = resolveEncoderConfig({ videoCodec: 'h264_nvenc', audioCodec: 'aac' }, false);
+
+const pipeline = buildResolvedPipelineConfig({
+  config: {
+    input: '/media/input.mp4',
+    encoding: { videoCodec: 'h264_nvenc', audioCodec: 'aac' },
+    output: { transport: 'rtmp', target: 'rtmp://example/live/base' },
+  },
+  presets,
+  activePresetId: 'soft',
+  nvencAvailable: false,
 });
 ```
 

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { hasEncoder, parseFfmpegEncoders, selectVideoCodec } from '../dist/index.js';
+import { hasEncoder, parseFfmpegEncoders, resolveEncoderConfig, selectVideoCodec } from '../dist/index.js';
 
 test('parseFfmpegEncoders extracts codec names from ffmpeg encoder output', () => {
   const output = [
@@ -26,4 +26,11 @@ test('selectVideoCodec falls back from nvenc to software codecs', () => {
   assert.equal(selectVideoCodec('hevc_nvenc', false), 'libx265');
   assert.equal(selectVideoCodec('libx264', false), 'libx264');
   assert.equal(selectVideoCodec(undefined, false), undefined);
+});
+
+test('resolveEncoderConfig returns a codec-adjusted copy', () => {
+  const config = { videoCodec: 'h264_nvenc', audioCodec: 'aac' };
+
+  assert.deepEqual(resolveEncoderConfig(config, false), { videoCodec: 'libx264', audioCodec: 'aac' });
+  assert.deepEqual(resolveEncoderConfig(config, true), { videoCodec: 'h264_nvenc', audioCodec: 'aac' });
 });

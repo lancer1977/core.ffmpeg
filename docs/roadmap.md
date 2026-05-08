@@ -41,6 +41,7 @@ Planned:
 - port logic from `chop-it/v2`
 - add sample usage in each app
 - document migration strategy
+- add preset-resolution and broadcaster-command examples
 
 ## V1.0 - Stable shared core
 

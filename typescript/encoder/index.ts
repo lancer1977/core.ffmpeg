@@ -36,3 +36,13 @@ export function selectVideoCodec(preferredCodec: string | undefined, nvencAvaila
 
   return preferredCodec;
 }
+
+export function resolveEncoderConfig<T extends { videoCodec?: string }>(
+  config: T,
+  nvencAvailable: boolean,
+): T {
+  return {
+    ...config,
+    videoCodec: selectVideoCodec(config.videoCodec, nvencAvailable),
+  };
+}

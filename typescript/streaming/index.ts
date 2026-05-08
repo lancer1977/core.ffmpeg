@@ -6,6 +6,24 @@ export function buildRtmpOutput(targetUrl: string): string[] {
   return ['-f', 'flv', targetUrl];
 }
 
+export function composeTwitchRtmpUrl(ingestUrl: string, streamKey: string): string {
+  if (!ingestUrl?.trim()) {
+    throw new Error('ingestUrl is required');
+  }
+
+  if (!streamKey?.trim()) {
+    throw new Error('streamKey is required');
+  }
+
+  const base = ingestUrl.trim().replace(/\/+$/, '');
+  const key = streamKey.trim().replace(/^\/+/, '');
+  return `${base}/${key}`;
+}
+
+export function buildTwitchRtmpOutput(ingestUrl: string, streamKey: string): string[] {
+  return ['-f', 'flv', composeTwitchRtmpUrl(ingestUrl, streamKey)];
+}
+
 export function buildHlsOutput(playlistPath: string, segmentPattern: string, segmentTimeSeconds = 4): string[] {
   if (!playlistPath?.trim()) {
     throw new Error('playlistPath is required');

@@ -1,3 +1,5 @@
+import type { FfmpegPresetFilter } from '../preset/index.js';
+
 export type FfmpegTransport = 'file' | 'hls' | 'rtmp';
 
 export interface FfmpegOverlayImage {
@@ -15,6 +17,9 @@ export interface FfmpegRuntimeText {
   fontSize?: number;
   x?: string;
   y?: string;
+  fontFile?: string;
+  box?: boolean;
+  boxBorderWidth?: number;
 }
 
 export interface FfmpegEncodingConfig {
@@ -41,5 +46,6 @@ export interface FfmpegPipelineConfig {
   encoding?: FfmpegEncodingConfig;
   overlays?: FfmpegOverlayImage[];
   runtimeText?: FfmpegRuntimeText;
+  presetFilters?: FfmpegPresetFilter[];
   output: FfmpegOutputConfig;
 }

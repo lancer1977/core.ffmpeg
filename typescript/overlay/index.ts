@@ -1,4 +1,5 @@
 import type { FfmpegOverlayImage, FfmpegRuntimeText } from '../config/index.js';
+import { escapeForFfmpegFilterValue } from '../utils/index.js';
 
 export function buildOverlayFilterChain(overlays: FfmpegOverlayImage[] = []): string {
   return overlays
@@ -19,13 +20,23 @@ export function buildDrawTextFilter(runtimeText?: FfmpegRuntimeText): string | u
   const fontSize = runtimeText.fontSize ?? 24;
   const x = runtimeText.x ?? '(w-text_w)/2';
   const y = runtimeText.y ?? 'h-(text_h*2)';
+  const escapedTextFile = escapeForFfmpegFilterValue(runtimeText.path);
+  const escapedFontFile = runtimeText.fontFile ? escapeForFfmpegFilterValue(runtimeText.fontFile) : undefined;
+  const box = runtimeText.box ?? true;
+  const boxBorderWidth = runtimeText.boxBorderWidth ?? 12;
 
   return [
-    `drawtext=textfile='${runtimeText.path}'`,
+    escapedFontFile ? `drawtext=fontfile=${escapedFontFile}` : `drawtext=textfile=${escapedTextFile}`,
+    escapedFontFile ? `textfile=${escapedTextFile}` : undefined,
     `reload=${reload}`,
     `fontcolor=${fontColor}`,
     `fontsize=${fontSize}`,
     `x=${x}`,
     `y=${y}`,
-  ].join(':');
+    `box=${box ? 1 : 0}`,
+    `boxborderw=${boxBorderWidth}`,
+    'boxcolor=black@0.5',
+  ]
+    .filter(Boolean)
+    .join(':');
 }

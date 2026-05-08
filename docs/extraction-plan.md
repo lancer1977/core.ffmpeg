@@ -22,12 +22,15 @@
 - output preset logic
 - richer media probing
 - any logging helpers tied to media jobs
+- active preset resolution and preset filter merge helpers
+- preset-aware pipeline resolution for host handoff
 
 ### From `app-busey-box`
 - RTMP streaming command invocation variants
 - overlay image handling edge cases
 - atomic write helper for `now_playing.txt`
 - FFmpeg startup/shutdown refinements
+- broadcaster command adaptation and preset passthrough
 
 ## Recommended next implementation step
 

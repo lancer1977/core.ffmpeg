@@ -1,9 +1,26 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildFileOutput, buildHlsOutput, buildRtmpOutput } from '../dist/index.js';
+import {
+  buildFileOutput,
+  buildHlsOutput,
+  buildRtmpOutput,
+  buildTwitchRtmpOutput,
+  composeTwitchRtmpUrl,
+} from '../dist/index.js';
 
 test('buildRtmpOutput builds flv target args', () => {
   assert.deepEqual(buildRtmpOutput('rtmp://example/live/stream'), ['-f', 'flv', 'rtmp://example/live/stream']);
+});
+
+test('buildTwitchRtmpOutput composes ingest url and stream key', () => {
+  assert.deepEqual(
+    buildTwitchRtmpOutput('rtmp://live.twitch.tv/app/', '/live_12345'),
+    ['-f', 'flv', 'rtmp://live.twitch.tv/app/live_12345']
+  );
+});
+
+test('composeTwitchRtmpUrl trims separator noise', () => {
+  assert.equal(composeTwitchRtmpUrl('rtmp://live.twitch.tv/app///', '///live_12345'), 'rtmp://live.twitch.tv/app/live_12345');
 });
 
 test('buildHlsOutput builds hls target args', () => {
