@@ -17,7 +17,7 @@ Provide a first deployable baseline for the consolidated `.NET` host and validat
 - Host and compose healthchecks now hit `/api/health`.
 - A production reverse-proxy profile is available via `docker-compose.proxy.yml` and `Caddyfile`.
 - Deployment env and secret guidance lives in [environment-variables.md](environment-variables.md).
+- Production deployment and rollback notes live in [production-deployment.md](production-deployment.md).
 
 ## Next steps
-1. Add production deployment notes and rollback procedure.
-2. Add release validation for the updated GitHub Actions workflow.
+1. Add release validation for the updated GitHub Actions workflow.

@@ -75,3 +75,4 @@ Then wire the host to use that instead of the current in-memory state.
 - Keep `FFMPEG_HOST_DATA_PATH` on durable storage.
 - Treat operator credentials as secrets and rotate them with deployment changes.
 - Use `DISABLE_HTTPS_REDIRECT=true` only when TLS terminates at the reverse proxy.
+- See [production deployment notes](features/deployment-bootstrap/production-deployment.md) for rollback and validation steps.
