@@ -14,27 +14,45 @@ export interface FfprobeJsonPayload {
   streams?: Array<{ codec_type?: string; codec_name?: string }>;
 }
 
+export function tryParseProbeOutput(stdout: string): FfmpegProbeResult | undefined {
+  try {
+    const parsed = JSON.parse(stdout) as FfprobeJsonPayload;
+
+    const duration = parsed.format?.duration ? Number(parsed.format.duration) : undefined;
+    const videoCodec = parsed.streams?.find((s) => s.codec_type === 'video')?.codec_name;
+    const audioCodec = parsed.streams?.find((s) => s.codec_type === 'audio')?.codec_name;
+
+    return {
+      durationSeconds: Number.isFinite(duration) ? duration : undefined,
+      videoCodec,
+      audioCodec,
+    };
+  } catch {
+    return undefined;
+  }
+}
+
 export function parseProbeOutput(stdout: string): FfmpegProbeResult {
-  const parsed = JSON.parse(stdout) as FfprobeJsonPayload;
+  const parsed = tryParseProbeOutput(stdout);
+  if (!parsed) {
+    throw new Error('Unable to parse ffprobe output.');
+  }
 
-  const duration = parsed.format?.duration ? Number(parsed.format.duration) : undefined;
-  const videoCodec = parsed.streams?.find((s) => s.codec_type === 'video')?.codec_name;
-  const audioCodec = parsed.streams?.find((s) => s.codec_type === 'audio')?.codec_name;
-
-  return {
-    durationSeconds: Number.isFinite(duration) ? duration : undefined,
-    videoCodec,
-    audioCodec,
-  };
+  return parsed;
 }
 
 export async function probeMedia(filePath: string): Promise<FfmpegProbeResult> {
-  const { stdout } = await execFileAsync('ffprobe', [
-    '-v', 'error',
-    '-show_entries', 'format=duration:stream=codec_type,codec_name',
-    '-of', 'json',
-    filePath,
-  ]);
+  try {
+    const { stdout } = await execFileAsync('ffprobe', [
+      '-v', 'error',
+      '-show_entries', 'format=duration:stream=codec_type,codec_name',
+      '-of', 'json',
+      filePath,
+    ]);
 
-  return parseProbeOutput(stdout);
+    return parseProbeOutput(stdout);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(`ffprobe failed for '${filePath}': ${message}`);
+  }
 }

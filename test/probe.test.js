@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { parseProbeOutput } from '../dist/index.js';
+import { parseProbeOutput, tryParseProbeOutput } from '../dist/index.js';
 
 test('parseProbeOutput extracts duration and codecs', () => {
   const result = parseProbeOutput(JSON.stringify({
@@ -30,4 +30,8 @@ test('parseProbeOutput ignores missing and invalid duration values', () => {
     videoCodec: 'hevc',
     audioCodec: undefined,
   });
+});
+
+test('tryParseProbeOutput returns undefined for invalid json', () => {
+  assert.equal(tryParseProbeOutput('{not json}'), undefined);
 });

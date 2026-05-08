@@ -11,6 +11,7 @@
 - port preset selection from `chop-it/v2` into the shared preset resolver
 - port encoder fallback resolution from `chop-it/v2` into the shared encoder helper
 - port the preset-aware pipeline resolver into host apps
+- port ffprobe parse-safety helpers into host apps
 - add documentation examples for RTMP, HLS, and file output usage
 - keep a Twitch/RTMP destination helper aligned with Busey-Box's broadcaster command shape
 - keep the Busey-Box-compatible broadcaster adapter aligned with the launcher profile shape

@@ -65,6 +65,7 @@ That means:
 - `core.ffmpeg` also lets host apps apply named render presets onto the shared pipeline config before command generation.
 - `core.ffmpeg` also resolves the active preset from a catalog so host apps can keep selection logic outside the engine.
 - `core.ffmpeg` also offers a resolved-pipeline helper that combines preset selection, preset merge, and codec fallback.
+- `core.ffmpeg` also exposes a safe ffprobe parse helper so bad output can be handled without crashing the caller.
 - `Busey-Box` remains the concrete Twitch/RTMP playout app until the shared playout contract is stable.
 
 The immediate integration target is to prove that `core.ffmpeg` can represent the FFmpeg command currently hand-built by `app-busey-box/app/run_ffmpeg.sh`.

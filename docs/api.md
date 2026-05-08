@@ -23,6 +23,8 @@ The public API should be simple enough for host apps to use without knowing FFmp
 - `applyRenderPreset`
 - `resolveActiveRenderPreset`
 - `buildResolvedPipelineConfig`
+- `parseProbeOutput`
+- `tryParseProbeOutput`
 
 ### Probing and utilities
 - `FfprobeService`
@@ -94,6 +96,8 @@ const pipeline = buildResolvedPipelineConfig({
   activePresetId: 'soft',
   nvencAvailable: false,
 });
+
+const probe = tryParseProbeOutput(stdout);
 ```
 
 The intent is that app code stays small and focused on workflow, not filter graph assembly.

@@ -37,6 +37,8 @@ The package currently exports:
 - `resolveActiveRenderPreset(presets, activePresetId)`
 - `buildResolvedPipelineConfig(options)`
 - `probeMedia(filePath)`
+- `parseProbeOutput(stdout)`
+- `tryParseProbeOutput(stdout)`
 - `startFfmpegProcess(command, args)`
 - `atomicWriteText(path, value)`
 - `writeRuntimeText(path, value)`
@@ -162,6 +164,15 @@ const pipeline = buildResolvedPipelineConfig({
   activePresetId: config.activePresetId,
   nvencAvailable: false,
 });
+```
+
+### Parse ffprobe output
+
+```ts
+import { parseProbeOutput, tryParseProbeOutput } from '@polyhydra/core.ffmpeg';
+
+const parsed = tryParseProbeOutput(stdout);
+const probe = parseProbeOutput(stdout);
 ```
 
 ## Build and Deploy

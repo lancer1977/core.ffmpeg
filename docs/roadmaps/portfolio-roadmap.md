@@ -31,6 +31,7 @@
 - [x] Add a shared active-preset resolver.
 - [x] Add a shared encoder-resolution helper.
 - [x] Add a resolved preset-aware pipeline helper.
+- [x] Add safe ffprobe parsing for invalid output.
 
 ## V2 (confidence)
 - [ ] Add deeper tests on highest-churn areas
