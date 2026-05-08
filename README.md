@@ -189,6 +189,8 @@ dotnet ./dotnet/test/Core.FFmpeg.Tests/bin/Release/net10.0/Core.FFmpeg.Tests.dll
 ### Run host locally without Docker
 
 ```bash
+FFMPEG_HOST_OPERATOR_USERNAME=operator \
+FFMPEG_HOST_OPERATOR_PASSWORD='change-me' \
 DISABLE_HTTPS_REDIRECT=true ASPNETCORE_URLS=http://localhost:8080 \
   dotnet run --project dotnet/Polyhydra.Ffmpeg.Host/Polyhydra.Ffmpeg.Host.csproj
 ```
@@ -201,3 +203,5 @@ docker compose up --build
 
 Host URL: `http://localhost:8080`  
 Status endpoint: `http://localhost:8080/api/status`
+
+See [deployment environment variables](docs/features/deployment-bootstrap/environment-variables.md) for the operator auth and storage settings.

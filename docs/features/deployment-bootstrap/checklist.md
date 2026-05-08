@@ -32,4 +32,6 @@
 
 ## Follow-up
 - [x] Add reverse-proxy deployment profile.
+- [x] Add deployment environment variable matrix and secrets guidance.
+- [x] Add auth gating for protected operator routes.
 - [ ] Add production deployment notes and rollback procedure.

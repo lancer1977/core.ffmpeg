@@ -68,3 +68,10 @@ Then wire the host to use that instead of the current in-memory state.
 ## Current deployment checks
 - Dockerfile healthcheck points at `/api/health`
 - docker-compose healthcheck points at `/api/health`
+- Operator routes use a basic-auth gate driven by `FFMPEG_HOST_OPERATOR_USERNAME` and `FFMPEG_HOST_OPERATOR_PASSWORD`
+- Reverse-proxy deployment guidance lives in `docker-compose.proxy.yml` and `Caddyfile`
+
+## Configuration guidance
+- Keep `FFMPEG_HOST_DATA_PATH` on durable storage.
+- Treat operator credentials as secrets and rotate them with deployment changes.
+- Use `DISABLE_HTTPS_REDIRECT=true` only when TLS terminates at the reverse proxy.

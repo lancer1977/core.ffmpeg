@@ -11,6 +11,9 @@ internal static class Program
         Run(BuilderTests.BuildsRtmpPreset);
         Run(VersioningTests.SupportsInlineTextOverlay);
         Run(HostHealthTests.ReportsHealthySnapshotForSeededState);
+        await RunAsync(HostAuthorizationTests.HealthEndpoint_RemainsAnonymous);
+        await RunAsync(HostAuthorizationTests.ProtectedRoutes_RejectAnonymousRequests);
+        await RunAsync(HostAuthorizationTests.ProtectedRoutes_AllowConfiguredOperatorCredentials);
         Run(ParityTests.HlsPresetUsesDestinationFileStemForSegmentPattern);
         Run(ParityTests.RtmpPresetWithoutStreamKeyUsesTrimmedDestination);
         Run(ParityTests.MetadataAddsRepeatedMetadataFlagsAndSkipsBlankKeys);

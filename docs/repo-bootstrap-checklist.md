@@ -40,8 +40,8 @@ Stand up a practical Blazor + MudBlazor host app on top of `core.ffmpeg` for hom
 - [ ] add Dockerfile
 - [ ] add docker-compose
 - [x] add reverse proxy config
-- [ ] add auth gating
-- [ ] document environment variables
+- [x] add auth gating
+- [x] document environment variables
 
 ## Phase 6 - Hardening
 - [ ] validate allowed source roots
