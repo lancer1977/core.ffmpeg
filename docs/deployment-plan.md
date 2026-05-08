@@ -44,6 +44,7 @@ graph TD
 - keep the host and runtime together
 - persist jobs/presets/history in SQLite
 - expose /api/status and job-control endpoints
+- expose /api/health for container and proxy checks
 
 ### Phase 2
 - split execution into a worker container if needed
@@ -63,3 +64,7 @@ Implement a small data layer for:
 - configuration
 
 Then wire the host to use that instead of the current in-memory state.
+
+## Current deployment checks
+- Dockerfile healthcheck points at `/api/health`
+- docker-compose healthcheck points at `/api/health`

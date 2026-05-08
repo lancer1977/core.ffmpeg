@@ -9,5 +9,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../../Polyhydra.Core.Ffmpeg/Polyhydra.Core.Ffmpeg.csproj" />
+    <ProjectReference Include="../../Polyhydra.Ffmpeg.Host/Polyhydra.Ffmpeg.Host.csproj" />
   </ItemGroup>
 </Project>

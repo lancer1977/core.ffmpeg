@@ -10,6 +10,7 @@ internal static class Program
         Run(BuilderTests.BuildsHlsPreset);
         Run(BuilderTests.BuildsRtmpPreset);
         Run(VersioningTests.SupportsInlineTextOverlay);
+        Run(HostHealthTests.ReportsHealthySnapshotForSeededState);
         Run(ParityTests.HlsPresetUsesDestinationFileStemForSegmentPattern);
         Run(ParityTests.RtmpPresetWithoutStreamKeyUsesTrimmedDestination);
         Run(ParityTests.MetadataAddsRepeatedMetadataFlagsAndSkipsBlankKeys);

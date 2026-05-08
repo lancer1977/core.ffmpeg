@@ -9,9 +9,16 @@ public sealed class HostStorage
     private readonly string _rootPath;
 
     public HostStorage(IConfiguration configuration)
+        : this(configuration.GetValue<string>("FFMPEG_HOST_DATA_PATH") ?? Path.Combine(AppContext.BaseDirectory, "data"))
     {
-        ArgumentNullException.ThrowIfNull(configuration);
-        _rootPath = configuration.GetValue<string>("FFMPEG_HOST_DATA_PATH") ?? Path.Combine(AppContext.BaseDirectory, "data");
+    }
+
+    public string RootPath => _rootPath;
+
+    public HostStorage(string rootPath)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(rootPath);
+        _rootPath = rootPath;
         Directory.CreateDirectory(_rootPath);
     }
 

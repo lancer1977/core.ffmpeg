@@ -21,7 +21,7 @@
 ## Runtime
 - [x] Add local `docker-compose.yml` service definition.
 - [x] Configure host for container HTTP mode when needed.
-- [ ] Add health checks for orchestrated deployments.
+- [x] Add health checks for orchestrated deployments.
 
 ## Validation
 - [x] Run TypeScript tests.
@@ -31,5 +31,5 @@
 - [ ] Validate updated GitHub Actions workflow run on next push/PR.
 
 ## Follow-up
-- [ ] Add reverse-proxy deployment profile.
+- [x] Add reverse-proxy deployment profile.
 - [ ] Add production deployment notes and rollback procedure.

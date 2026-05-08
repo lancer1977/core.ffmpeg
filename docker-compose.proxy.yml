@@ -1,0 +1,16 @@
+services:
+  polyhydra-ffmpeg-host:
+    expose:
+      - "8080"
+
+  caddy:
+    image: caddy:2.8-alpine
+    container_name: polyhydra-ffmpeg-caddy
+    depends_on:
+      polyhydra-ffmpeg-host:
+        condition: service_healthy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro

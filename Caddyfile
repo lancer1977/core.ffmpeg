@@ -1,0 +1,4 @@
+{$FFMPEG_HOSTNAME:localhost} {
+  encode gzip
+  reverse_proxy polyhydra-ffmpeg-host:8080
+}

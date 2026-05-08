@@ -14,8 +14,9 @@ Provide a first deployable baseline for the consolidated `.NET` host and validat
 - Baseline deployment artifacts added.
 - CI workflow now installs `ffmpeg` and restores package dependencies explicitly before build.
 - Local build/test validation remains required on each change.
+- Host and compose healthchecks now hit `/api/health`.
+- A production reverse-proxy profile is available via `docker-compose.proxy.yml` and `Caddyfile`.
 
 ## Next steps
-1. Add health-check and readiness endpoints to compose/proxy stack.
-2. Add production reverse-proxy profile (Caddy/Traefik) for TLS.
-3. Add deployment environment variable matrix and secrets guidance.
+1. Add deployment environment variable matrix and secrets guidance.
+2. Add auth gating for protected operator routes.
